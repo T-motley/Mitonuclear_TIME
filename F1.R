@@ -31,10 +31,10 @@ p1 <- ggplot(data_fig, aes(x = group_label, y = production, fill = group_label))
   theme(legend.position = "none",
         axis.text.x = element_text(angle = 45, hjust = 1))
 
-#add significance brackets(Q1: Fx matched vs f2 mismatched)
+#add significance brackets(Q1: Fx matched vs f2 mismatched, Q2: Fx mismatched vs Fx Matched)
 p1 <- p1 + 
   stat_compare_means(comparisons = list(c("Fx matched", "F2 mismatched")),
                      label = "p.signif", method = "t.test") +
   stat_compare_means(comparisons = list(c("Fx matched", "Fx mismatched")),
                      label = "p.signif", method = "t.test", 
-                     label.y = 85)  # adjust y position
+                     label.y = 85)  
