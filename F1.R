@@ -23,7 +23,7 @@ p1 <- ggplot(data_fig, aes(x = group_label, y = production, fill = group_label))
                width = 0.2, size = 0.8, color = "black") +
   scale_fill_manual(values = c("Fx matched" = "green", 
                                "F2 mismatched" = "red", 
-                               "Fx mismatched" = "#F18F01")) +
+                               "Fx mismatched" = "orange")) +
   labs(x = "Mitonuclear status and evolutionary stage",
        y = "Offspring production per female",
        title = "Admixture and evolutionary effects on production") +
