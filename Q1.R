@@ -1,7 +1,7 @@
 #Q1: Does admixture affect production (F2 mismatched vs fx matched)
 library(dplyr)
 
-#Create seperate Dataframe
+#Create separate Dataframe
 
 data_q1 <- data %>%
   dplyr::filter((stage == "f2" & status == "mismatched") |
