@@ -14,3 +14,17 @@ q2_lm <- lmer(data = data_q2, production ~ status + block + (1|pop))
 
 summary(q2_lm)
 anova(q2_lm)
+
+#Checking assumptions for LMM (Gaussian)
+res <- resid(q2_lm)
+qqnorm(res) ; qqline(res)
+
+
+#negative binomial model
+library(glmmTMB)
+
+q2_nb <- glmmTMB(production ~ status + block + (1|pop),
+                 data = data_q2,
+                 family = nbinom2)
+
+summary(q2_nb)
