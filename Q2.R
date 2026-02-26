@@ -16,8 +16,8 @@ summary(q2_lm)
 anova(q2_lm)
 
 #Checking assumptions for LMM (Gaussian)
-res <- resid(q2_lm)
-qqnorm(res) ; qqline(res)
+res2 <- resid(q2_lm)
+qqnorm(res2) ; qqline(res2)
 
 
 #negative binomial model
