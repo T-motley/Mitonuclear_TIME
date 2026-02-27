@@ -19,6 +19,12 @@ anova(q2_lm)
 res2 <- resid(q2_lm)
 qqnorm(res2) ; qqline(res2)
 
+#Poisson Model
+library(glmmTMB)
+
+q2_pois <- glmmTMB(production ~ status + block + (1|pop),
+                   data = data_q2,
+                   family = poisson())
 
 #negative binomial model
 library(glmmTMB)
@@ -28,3 +34,6 @@ q2_nb <- glmmTMB(production ~ status + block + (1|pop),
                  family = nbinom2)
 
 summary(q2_nb)
+
+#LRT
+anova(q2_pois,q2_nb, test = "LRT")

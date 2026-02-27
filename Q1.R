@@ -26,6 +26,10 @@ anova(q1_lm)
 res1 <- resid(q1_lm)
 qqnorm(res1) ; qqline(res1)
 
+#poisson model
+library(glmmTMB)
+q1_pois <- glmmTMB(data = data_q1, production ~ group + block + (1|pop), family= poisson())
+summary(q1_pois)
 
 #negative binomial model
 library(glmmTMB)
@@ -35,3 +39,8 @@ q1_nb <- glmmTMB(production ~ group + block + (1|pop),
                  family = nbinom2)
 
 summary(q1_nb)
+
+anova(q1_nb)
+
+#Likelihood ratio test for best fit between pois and nb
+anova(q1_pois,q1_nb, test = "LRT")
