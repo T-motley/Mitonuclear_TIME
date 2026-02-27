@@ -13,7 +13,7 @@ data_fig <- data %>%
     stage == "f2" & status == "mismatched" ~ "F2 mismatched"),
     group_label = factor(group_label, 
                          levels = c("Fx matched", "F2 mismatched", "Fx mismatched")))
-  ))
+
 
 # Plot 1: Boxplot with model-based means and significance
 p1 <- ggplot(data_fig, aes(x = group_label, y = production, fill = group_label)) +
