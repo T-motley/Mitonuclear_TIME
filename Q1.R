@@ -42,5 +42,58 @@ summary(q1_nb)
 
 anova(q1_nb)
 
+p_val <- summary(q1_nb)$coefficients$cond["groupf2_mismatched", "Pr(>|z|)"]
+
 #Likelihood ratio test for best fit between pois and nb
 anova(q1_pois,q1_nb, test = "LRT")
+
+#Plot For comparison 
+###
+
+library(ggplot2)
+
+y_max <- max(data_q1$production)
+
+q1_p <- ggplot(data_q1, aes(x = group, y = production, fill = group)) +
+  
+  geom_boxplot(width = 0.6, alpha = 0.8, outlier.size = 1.5) +
+  
+  # Fix labels
+  scale_x_discrete(labels = c(
+    "fx_matched" = "Mitonuclear\nMatched",
+    "f2_mismatched" = "Mitonuclear\nMismatched"
+  )) +
+  
+  scale_fill_manual(values = c(
+    "fx_matched" = "#4E79A7",
+    "f2_mismatched" = "#E15759"
+  )) +
+  
+  # y-axis ticks
+  scale_y_continuous(
+    breaks = seq(0, 140, by = 20),
+    expand = expansion(mult = c(0.02, 0.12))
+  ) +
+  
+  # Significance bracket
+  annotate("segment", x = 1, xend = 2,
+           y = y_max * 1.05, yend = y_max * 1.05) +
+  annotate("segment", x = 1, xend = 1,
+           y = y_max * 1.02, yend = y_max * 1.05) +
+  annotate("segment", x = 2, xend = 2,
+           y = y_max * 1.02, yend = y_max * 1.05) +
+  
+  annotate("text",
+           x = 1.5,
+           y = y_max * 1.08,
+           label = stars,
+           size = 6) +
+  
+  labs(x = NULL,
+       y = "Offspring Productivity"
+       title = "Offspring Productivity in Matched mitonuclear") +
+  
+  theme_classic(base_size = 14) +
+  theme(legend.position = "none")
+
+q1_p
