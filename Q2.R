@@ -52,10 +52,14 @@ y_max2 <- max(data_q2$production)
 q2_p <- ggplot(data_q2, aes(x = status, y = production, fill = status)) +
   
   geom_boxplot(width = 0.6, alpha = 0.8, outlier.size = 1.5) +
-  
+ 
+   scale_x_discrete(labels = c(
+    "matched" = "Mitonuclear\nMatched",
+    "mismatched" = "Mitonuclear\nMixed"
+  )) +
   scale_fill_manual(values = c(
-    "matched" = "#4E79A7",
-    "mismatched" = "#E15759"
+    "matched" = "darkgreen",
+    "mismatched" = "orange"
   )) +
   
   # y-axis ticks
@@ -66,21 +70,21 @@ q2_p <- ggplot(data_q2, aes(x = status, y = production, fill = status)) +
   
   # Significance bracket
   annotate("segment", x = 1, xend = 2,
-           y = y_max2 * 1.05, yend = y_max2 * 1.05) +
+           y = y_max1 * 1.05, yend = y_max1 * 1.05) +
   annotate("segment", x = 1, xend = 1,
-           y = y_max2 * 1.02, yend = y_max2 * 1.05) +
+           y = y_max1 * 1.02, yend = y_max1 * 1.05) +
   annotate("segment", x = 2, xend = 2,
-           y = y_max2 * 1.02, yend = y_max2 * 1.05) +
+           y = y_max1 * 1.02, yend = y_max1 * 1.05) +
   
   annotate("text",
            x = 1.5,
-           y = y_max2 * 1.08,
+           y = y_max1 * 1.08,
            label = stars2,
            size = 6) +
   
   labs(x = NULL,
        y = "Offspring Productivity",
-       title = "Offspring Productivity comparison between matched and mismatched mitonuclear after evolution") +
+       title = "Offspring productivity comparison between Matched and\nMixed mitonuclear after adaptation") +
   
   theme_classic(base_size = 14) +
   theme(legend.position = "none")

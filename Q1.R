@@ -61,12 +61,12 @@ q1_p <- ggplot(data_q1, aes(x = group, y = production, fill = group)) +
   # Fix labels
   scale_x_discrete(labels = c(
     "fx_matched" = "Mitonuclear\nMatched",
-    "f2_mismatched" = "Mitonuclear\nMismatched"
+    "f2_mismatched" = "Mitonuclear\nMixed"
   )) +
   
   scale_fill_manual(values = c(
-    "fx_matched" = "#4E79A7",
-    "f2_mismatched" = "#E15759"
+    "fx_matched" = "darkgreen",
+    "f2_mismatched" = "red"
   )) +
   
   # y-axis ticks
@@ -91,7 +91,7 @@ q1_p <- ggplot(data_q1, aes(x = group, y = production, fill = group)) +
   
   labs(x = NULL,
        y = "Offspring Productivity",
-       title = "Offspring Productivity between Matched and mismatched mitonuclear before adaptation") +
+       title = "Offspring productivity comparison between Matched and\nMixed mitonuclear before adaptation") +
   
   theme_classic(base_size = 14) +
   theme(legend.position = "none")

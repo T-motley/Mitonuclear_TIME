@@ -15,26 +15,37 @@ data_fig <- data %>%
                          levels = c("Fx matched", "F2 mismatched", "Fx mismatched")))
 
 
-# Plot 1: Boxplot with model-based means and significance
-p1 <- ggplot(data_fig, aes(x = group_label, y = production, fill = group_label)) +
-  geom_boxplot(alpha = 0.7, width = 0.7) +
-  stat_summary(fun = mean, geom = "point", size = 3, color = "black") +
-  stat_summary(fun.data = mean_se, geom = "errorbar", 
-               width = 0.2, size = 0.8, color = "black") +
-  scale_fill_manual(values = c("Fx matched" = "green", 
-                               "F2 mismatched" = "red", 
-                               "Fx mismatched" = "orange")) +
-  labs(x = "Mitonuclear status and evolutionary stage",
-       y = "Offspring production per female",
-       title = "Admixture and evolutionary effects on production") +
-  theme_bw(base_size= 12) +
-  theme(legend.position = "none",
-        axis.text.x = element_text(angle = 45, hjust = 1))
+# Plot 1: combined Boxplot 
 
-#add significance brackets(Q1: Fx matched vs f2 mismatched, Q2: Fx mismatched vs Fx Matched)
-p1 <- p1 + 
-  stat_compare_means(comparisons = list(c("Fx matched", "F2 mismatched")),
-                     label = "p.signif", method = "t.test") +
-  stat_compare_means(comparisons = list(c("Fx matched", "Fx mismatched")),
-                     label = "p.signif", method = "t.test", 
-                     label.y = 85)  
+ggplot(data_fig,
+       aes(x = group_label,
+           y = production,
+           fill = group_label)) +
+  
+  geom_boxplot(width = 0.6,
+               alpha = 0.85,
+               outlier.size = 1.3) +
+  
+  scale_x_discrete(labels = c(
+    "Fx matched" = "Fx\nMatched",
+    "F2 mismatched" = "F2\nMixed (Before)",
+    "Fx mismatched" = "Fx\nMixed (After)"
+  )) +
+  
+  scale_fill_manual(values = c(
+    "Fx matched" = "darkgreen",
+    "F2 mismatched" = "red",
+    "Fx mismatched" = "orange"
+  )) +
+  
+  scale_y_continuous(
+    breaks = seq(0, 140, by = 20),
+    expand = expansion(mult = c(0.02, 0.12))
+  ) +
+  
+  labs(x = NULL,
+       y = "Offspring Productivity",
+       title = "Productivity of Mitonuclear Combinations Before and After Adaptation") +
+  
+  theme_classic(base_size = 14) +
+  theme(legend.position = "none")
