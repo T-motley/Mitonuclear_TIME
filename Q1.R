@@ -52,7 +52,7 @@ anova(q1_pois,q1_nb, test = "LRT")
 
 library(ggplot2)
 
-y_max <- max(data_q1$production)
+y_max1 <- max(data_q1$production)
 
 q1_p <- ggplot(data_q1, aes(x = group, y = production, fill = group)) +
   
@@ -77,21 +77,21 @@ q1_p <- ggplot(data_q1, aes(x = group, y = production, fill = group)) +
   
   # Significance bracket
   annotate("segment", x = 1, xend = 2,
-           y = y_max * 1.05, yend = y_max * 1.05) +
+           y = y_max1 * 1.05, yend = y_max1 * 1.05) +
   annotate("segment", x = 1, xend = 1,
-           y = y_max * 1.02, yend = y_max * 1.05) +
+           y = y_max1 * 1.02, yend = y_max1 * 1.05) +
   annotate("segment", x = 2, xend = 2,
-           y = y_max * 1.02, yend = y_max * 1.05) +
+           y = y_max1 * 1.02, yend = y_max1 * 1.05) +
   
   annotate("text",
            x = 1.5,
-           y = y_max * 1.08,
+           y = y_max1 * 1.08,
            label = stars,
            size = 6) +
   
   labs(x = NULL,
-       y = "Offspring Productivity"
-       title = "Offspring Productivity in Matched mitonuclear") +
+       y = "Offspring Productivity",
+       title = "Offspring Productivity between Matched and mismatched mitonuclear before adaptation") +
   
   theme_classic(base_size = 14) +
   theme(legend.position = "none")
