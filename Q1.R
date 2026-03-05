@@ -91,7 +91,7 @@ q1_p <- ggplot(data_q1, aes(x = group, y = production, fill = group)) +
   
   labs(x = NULL,
        y = "Offspring Productivity",
-       title = "Offspring productivity comparison between Matched and\nMixed mitonuclear before adaptation") +
+       title = "Offspring productivity comparison between Matched and\nMixed mitonuclear combinations before adaptation") +
   
   theme_classic(base_size = 14) +
   theme(legend.position = "none")

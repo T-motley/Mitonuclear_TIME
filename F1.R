@@ -43,9 +43,37 @@ ggplot(data_fig,
     expand = expansion(mult = c(0.02, 0.12))
   ) +
   
+  # Significance bracket 1
+  annotate("segment", x = 1, xend = 2,
+           y = y_max1 * 1.05, yend = y_max1 * 1.05) +
+  annotate("segment", x = 1, xend = 1,
+           y = y_max1 * 1.02, yend = y_max1 * 1.05) +
+  annotate("segment", x = 2, xend = 2,
+           y = y_max1 * 1.02, yend = y_max1 * 1.05) +
+  
+  annotate("text",
+           x = 1.5,
+           y = y_max1 * 1.08,
+           label = stars,
+           size = 6) +
+  #Sig bracket 2
+  annotate("segment", x = 2, xend = 3,
+           y = y_max1 * 1.05, yend = y_max1 * 1.05) +
+  annotate("segment", x = 2, xend = 2,
+           y = y_max1 * 1.02, yend = y_max1 * 1.05) +
+  annotate("segment", x = 3, xend = 3,
+           y = y_max1 * 1.02, yend = y_max1 * 1.05) +
+  
+  annotate("text",
+           x = 2.5,
+           y = y_max1 * 1.08,
+           label = stars3,
+           size = 6) +
+  
   labs(x = NULL,
        y = "Offspring Productivity",
        title = "Productivity of Mitonuclear Combinations Before and After Adaptation") +
   
   theme_classic(base_size = 14) +
   theme(legend.position = "none")
+

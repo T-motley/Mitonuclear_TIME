@@ -84,9 +84,19 @@ q2_p <- ggplot(data_q2, aes(x = status, y = production, fill = status)) +
   
   labs(x = NULL,
        y = "Offspring Productivity",
-       title = "Offspring productivity comparison between Matched and\nMixed mitonuclear after adaptation") +
+       title = "Offspring productivity comparison between Matched and\nMixed mitonuclear combinations after adaptation") +
   
   theme_classic(base_size = 14) +
   theme(legend.position = "none")
 
 q2_p
+
+#Is there difference between F2 mixed and FX mixed?
+
+q25_nb <- glmmTMB(production ~ group_label + block + (1|pop),
+                 data = data_fig,
+                 family = nbinom2)
+
+summary(q25_nb)
+
+p_val3 <- summary(q25_nb)$coefficients$cond["group_labelF2 mismatched", "Pr(>|z|)"]
