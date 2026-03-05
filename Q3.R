@@ -23,6 +23,8 @@ q3_nb <- glmmTMB(
   data = data_q3
 )
 
+summary(q3_nb)
+
 #Plot
 
 ggplot(data_q3, aes(stage, production, colour = genotype, group = genotype)) +
