@@ -17,7 +17,7 @@ data_fig <- data %>%
 
 # Plot 1: combined Boxplot 
 
-ggplot(data_fig,
+Comb_p <- ggplot(data_fig,
        aes(x = group_label,
            y = production,
            fill = group_label)) +
@@ -72,8 +72,9 @@ ggplot(data_fig,
   
   labs(x = NULL,
        y = "Offspring Productivity",
-       title = "Productivity of Mitonuclear Combinations Before and After Adaptation") +
+       title = "Productivity of Mitonuclear Combinations Before\nand After Adaptation") +
   
   theme_classic(base_size = 14) +
   theme(legend.position = "none")
+
 

@@ -19,15 +19,22 @@ data_q3$stage <- relevel(data_q3$stage, "f2")
 
 q3_nb <- glmmTMB(
   production ~ genotype * stage + block,
-  family = nbinom2(link="log"),
+  family = nbinom2,
   data = data_q3
 )
 
 summary(q3_nb)
 
 #Plot
+summary_data <- data_q3 %>%
+  group_by(genotype, stage) %>%
+  summarise(
+    mean_prod = mean(production),
+    se = sd(production) / sqrt(n()),
+    .groups = "drop"
+  )
 
-ggplot(data_q3, aes(stage, production, colour = genotype, group = genotype)) +
+q3_p <- ggplot(summary_data, aes(stage, mean_prod, colour = genotype, group = genotype)) +
   stat_summary(fun = mean, geom = "point", size = 3) +
   stat_summary(fun = mean, geom = "line", linewidth = 1) +
   
@@ -35,7 +42,7 @@ ggplot(data_q3, aes(stage, production, colour = genotype, group = genotype)) +
     "mX" = "blue",
     "tX" = "red"
   )) +
-  
+  geom_errorbar(aes(ymin = mean_prod - se, ymax = mean_prod + se), width = 0.1) +
   scale_x_discrete(labels = c(
     "f2" = "Before admixture\nadaptation",
     "fx" = "After admixture\nadaptation"
@@ -43,9 +50,9 @@ ggplot(data_q3, aes(stage, production, colour = genotype, group = genotype)) +
   
   labs(
     x = "",
-    y = "Productivity",
+    y = " Mean Offspring Productivity",
     colour = "Genotype",
-    title = "Comparison of adaptation effects\non Mitonuclear combination"
+    title = "Comparison of adaptation effects on Mitonuclear combination"
   ) +
   
   theme_classic()
